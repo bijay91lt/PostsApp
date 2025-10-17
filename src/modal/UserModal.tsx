@@ -18,7 +18,7 @@ function Usermodal({isOpen, onClose, children}: UserModalProps) {
       >
         {children}
       </div>
-    </div>
+    </div>    
     
   );
 }
