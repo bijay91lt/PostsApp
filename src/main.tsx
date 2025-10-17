@@ -5,7 +5,8 @@ import App from './App.tsx'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import Home from './pages/Home.tsx'
 import Posts from './pages/Posts.tsx'
-
+import User from './pages/User.tsx'
+import Contact from './pages/Contact.tsx'
 
 const router = createBrowserRouter(
   [
@@ -20,6 +21,14 @@ const router = createBrowserRouter(
         {
           path: "posts",
           element: <Posts/>
+        },
+        {
+          path:"contact",
+          element:<Contact/>
+        },
+        {
+          path:"user/:userid",
+          element:<User/>
         }
       ]
     }

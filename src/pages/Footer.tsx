@@ -7,7 +7,7 @@ function Footer() {
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center">
                             <img
-                                src="public\trans_bg.png"
+                                src="/trans_bg.png"
                                 className="mr-3 h-16"
                                 alt="Logo"
                             />
@@ -23,8 +23,8 @@ function Footer() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/about" className="hover:underline">
-                                        About
+                                    <Link to="/posts" className="hover:underline">
+                                        Posts
                                     </Link>
                                 </li>
                             </ul>
