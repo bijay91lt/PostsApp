@@ -93,7 +93,7 @@ function Header() {
         <UserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <div className="p-6 text-center">
             <h2 className="text-2xl font-semibold mb-4">User Info</h2>
-            <p className="text-gray-600 mb-6">Hello, Kakeru 👋</p>
+            <p className="text-gray-600 mb-6">Hello, Bijay Tamang 👋</p>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               onClick={() => setIsModalOpen(false)}
