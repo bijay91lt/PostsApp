@@ -90,19 +90,57 @@ function Header() {
 
       {/* Modal */}
       {isModalOpen && (
-        <UserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <div className="p-6 text-center">
-            <h2 className="text-2xl font-semibold mb-4">User Info</h2>
-            <p className="text-gray-600 mb-6">Hello, Bijay Tamang 👋</p>
-            <button
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
+      <UserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>   
+          {/* Close Button */}
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="absolute top-4 right-4 text-gray-500 hover:text-white-900 transition cursor-pointer"
+          > Close 
+          </button>
+
+          {/* Cover Image */}
+          <div className="h-32 overflow-hidden">
+            <img
+              className="object-cover w-full h-full"
+              src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max"
+              alt="Cover"
+            />
           </div>
+
+          {/* Profile Picture */}
+          <div className="w-32 h-32 mx-auto relative -mt-16 border-4 border-white rounded-full overflow-hidden shadow-lg">
+            <img
+              className="object-cover w-full h-full"
+              src="/IMG_0329.JPG"
+              alt="User"
+            />
+          </div>
+
+          {/* Name and Title */}
+          <div className="text-center mt-4 px-6">
+            <h2 className="text-xl font-bold text-gray-900">Hari Bahadur</h2>
+            <p className="text-gray-500 mt-1">React Developer</p>
+          </div>
+
+          {/* Stats */}
+          <ul className="flex justify-around mt-6 text-gray-700 border-t border-b py-4">
+            <li className="flex flex-col items-center">
+              <span className="text-blue-600 font-semibold">2k</span>
+              <span className="text-sm text-gray-500">Reviews</span>
+            </li>
+            <li className="flex flex-col items-center">
+              <span className="text-blue-600 font-semibold">10k</span>
+              <span className="text-sm text-gray-500">Followers</span>
+            </li>
+            <li className="flex flex-col items-center">
+              <span className="text-blue-600 font-semibold">15</span>
+              <span className="text-sm text-gray-500">Projects</span>
+            </li>
+          </ul>
+
         </UserModal>
       )}
+
     </>
   );
 }
