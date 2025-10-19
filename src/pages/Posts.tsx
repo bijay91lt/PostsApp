@@ -6,16 +6,21 @@ function Posts() {
   const [isNewPostModalOpen, setIsNewPostModalOpen] = useState(false);
   const [userPosts, setUserPosts] = useState<Post[]>([]);
 
-  // Load posts from localStorage
+  // Load posts from localStorage once on mount
   useEffect(() => {
-    const storedPosts = JSON.parse(localStorage.getItem("userPosts") || "[]");
+    const storedPosts: Post[] = JSON.parse(
+      localStorage.getItem("userPosts") || "[]"
+    );
     setUserPosts(storedPosts);
   }, []);
 
   // Add new post
   const addNewPost = (newPost: Omit<Post, "id">) => {
     const postWithId: Post = { ...newPost, id: Date.now() };
+
+    // Prepend new post to existing state
     const updatedPosts = [postWithId, ...userPosts];
+
     setUserPosts(updatedPosts);
     localStorage.setItem("userPosts", JSON.stringify(updatedPosts));
   };
@@ -29,6 +34,7 @@ function Posts() {
       >
         New Post
       </button>
+
       {/* New Post Modal */}
       {isNewPostModalOpen && (
         <NewPostModal
@@ -40,59 +46,57 @@ function Posts() {
         </NewPostModal>
       )}
 
-      {/* Horizontal Feed */}
+      {/* Vertical Feed */}
       {userPosts.length === 0 ? (
         <p className="text-gray-500 text-center mt-8">No posts yet</p>
       ) : (
-        <div className="flex overflow-x-auto snap-x snap-mandatory h-screen">
+        <div className="flex flex-col gap-6">
           {userPosts.map((post) => (
-            <div
+            <article
               key={post.id}
-              className="flex-shrink-0 w-full h-full snap-start p-4"
+              className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
             >
-              <article className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden h-full">
-                {/* Post Image - full width */}
-                {post.image ? (
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-auto max-h-[400px] object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
-                    No Image
+              {/* Post Image - full width */}
+              {post.image ? (
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-auto max-h-[400px] object-cover"
+                />
+              ) : (
+                <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
+                  No Image
+                </div>
+              )}
+
+              {/* Post Content */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-blue-700">
+                  {post.title}
+                </h3>
+                <p className="mt-3 text-gray-700 line-clamp-3">{post.body}</p>
+
+                {/* User and Reactions */}
+                <div className="mt-4 flex justify-between items-center text-sm text-gray-500">
+                  <span>👤 User {post.userId}</span>
+                  <span>❤️ {post.reactions}</span>
+                </div>
+
+                {/* Optional Tags */}
+                {post.tags && post.tags.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {post.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
                   </div>
                 )}
-
-                {/* Post Content */}
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold text-blue-700">
-                    {post.title}
-                  </h3>
-                  <p className="mt-3 text-gray-700 line-clamp-3">{post.body}</p>
-
-                  {/* User and Reactions */}
-                  <div className="mt-4 flex justify-between items-center text-sm text-gray-500">
-                    <span>👤 User {post.userId}</span>
-                    <span>❤️ {post.reactions}</span>
-                  </div>
-
-                  {/* Optional Tags */}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {post.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </article>
-            </div>
+              </div>
+            </article>
           ))}
         </div>
       )}

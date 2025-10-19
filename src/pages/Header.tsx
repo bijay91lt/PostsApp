@@ -1,7 +1,7 @@
-import Logo from '/trans_bg.png';
-import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import UserModal from '../modal/UserModal';
+import Logo from "/trans_bg.png";
+import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
+import UserModal from "../modal/UserModal";
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +21,10 @@ function Header() {
             </Link>
 
             {/* Profile image */}
-            <div className="flex items-center lg:order-2" onClick={() => setIsModalOpen(true)}>
+            <div
+              className="flex items-center lg:order-2"
+              onClick={() => setIsModalOpen(true)}
+            >
               <img
                 className="w-16 h-16 rounded-full mx-auto cursor-pointer"
                 src="/IMG_0329.JPG"
@@ -31,7 +34,7 @@ function Header() {
 
             {/* Nav Links */}
             <div
-              className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+              className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -88,17 +91,18 @@ function Header() {
       {/* Modal */}
       {isModalOpen && (
         <UserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <div className="p-6 text-center">
+          <div className="p-6 text-center">
             <h2 className="text-2xl font-semibold mb-4">User Info</h2>
             <p className="text-gray-600 mb-6">Hello, Kakeru 👋</p>
             <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                onClick={() => setIsModalOpen(false)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              onClick={() => setIsModalOpen(false)}
             >
-                Close
+              Close
             </button>
-            </div>
-        </UserModal>)}
+          </div>
+        </UserModal>
+      )}
     </>
   );
 }
