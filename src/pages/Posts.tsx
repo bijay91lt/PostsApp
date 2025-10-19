@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NewPostModal from "../modal/NewpostModal";
+import NewPostModal from "../modal/NewPostModal";
 
 function Posts() {
   const [isNewPostModelOpen, setIsNewPostModalOpen] = useState(false);
