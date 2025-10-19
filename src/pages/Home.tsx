@@ -5,12 +5,11 @@ function Home() {
   const { data: posts, loading, error } = usePosts();
 
   if (loading) return <p className="p-6 text-center">Loading...</p>;
-  if (error)
-    return <p className="p-6 text-red-600 text-center">Error: {error}</p>;
+  if (error) return <p className="p-6 text-red-600 text-center">Error: {error}</p>;
 
   // Shuffle posts and take first 10
   const shuffledPosts = [...posts].sort(() => Math.random() - 0.5);
-  const displayedPosts = shuffledPosts.slice(0, 10);
+  const displayedPosts = shuffledPosts.slice(0, 20  );
 
   return (
     <div className="space-y-6 p-6">

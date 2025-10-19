@@ -6,24 +6,24 @@ function Posts() {
   const [isNewPostModalOpen, setIsNewPostModalOpen] = useState(false);
   const [userPosts, setUserPosts] = useState<Post[]>([]);
 
-  // Load posts from localStorage once on mount
-  useEffect(() => {
-    const storedPosts: Post[] = JSON.parse(
-      localStorage.getItem("userPosts") || "[]"
-    );
-    setUserPosts(storedPosts);
-  }, []);
+    // Load posts from localStorage once on mount
+    useEffect(() => {
+      const storedPosts: Post[] = JSON.parse(
+        localStorage.getItem("userPosts") || "[]"
+      );
+      setUserPosts(storedPosts);
+    }, []);
 
-  // Add new post
-  const addNewPost = (newPost: Omit<Post, "id">) => {
-    const postWithId: Post = { ...newPost, id: Date.now() };
+    // Add new post
+    const addNewPost = (newPost: Omit<Post, "id">) => {
+      const postWithId: Post = { ...newPost, id: Date.now() };
 
-    // Prepend new post to existing state
-    const updatedPosts = [postWithId, ...userPosts];
+      // Prepend new post to existing state
+      const updatedPosts = [postWithId, ...userPosts];
 
-    setUserPosts(updatedPosts);
-    localStorage.setItem("userPosts", JSON.stringify(updatedPosts));
-  };
+      setUserPosts(updatedPosts);
+      localStorage.setItem("userPosts", JSON.stringify(updatedPosts));
+    };
 
   return (
     <div className="max-w-2xl mx-auto w-full h-full gap-6 grid grid-cols-1">
@@ -81,20 +81,6 @@ function Posts() {
                   <span>👤 User {post.userId}</span>
                   <span>❤️ {post.reactions}</span>
                 </div>
-
-                {/* Optional Tags */}
-                {post.tags && post.tags.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {post.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </article>
           ))}

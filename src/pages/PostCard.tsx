@@ -30,20 +30,6 @@ const PostCard = ({ post }: PostCardProps) => {
           <span>👤 User {post.userId}</span>
           <span>❤️ {post.reactions}</span>
         </div>
-
-        {/* Optional Tags */}
-        {post.tags && post.tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-2">
-            {post.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </article>
   );
