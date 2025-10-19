@@ -1,4 +1,20 @@
+import { useState } from "react";
 function Contact() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmit = (email: React.FormEvent) => {
+    email.preventDefault(); //prevents page reload
+
+    console.log({fullName, email, phone});
+
+    alert("Form Submitted");
+
+    setFullName("");
+    setEmail("");
+    setPhone("");
+  }
   return (
     <>
       <div className="min-h-screen bg-blue-50 flex items-center justify-center p-6">
@@ -18,20 +34,27 @@ function Contact() {
             <input
               type="text"
               placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               className="p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <input
-              type="text"
+              type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <input
-              type="text"
+              type="tel"
               placeholder="Telephone Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
 
-            <button className="mt-4 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+            <button className="mt-4 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+            onClick={handleSubmit}>
               Submit
             </button>
           </div>
