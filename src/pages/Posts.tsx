@@ -27,7 +27,7 @@ function Posts() {
 
   return (
     <div className="max-w-2xl mx-auto w-full h-full gap-6 grid grid-cols-1">
-      {/* New Post Button */}
+
       <button
         className="mt-4 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
         onClick={() => setIsNewPostModalOpen(true)}
@@ -35,7 +35,6 @@ function Posts() {
         New Post
       </button>
 
-      {/* New Post Modal */}
       {isNewPostModalOpen && (
         <NewPostModal
           isOpen={isNewPostModalOpen}
@@ -46,7 +45,6 @@ function Posts() {
         </NewPostModal>
       )}
 
-      {/* Vertical Feed */}
       {userPosts.length === 0 ? (
         <p className="text-gray-500 text-center mt-8">No posts yet</p>
       ) : (
@@ -56,7 +54,7 @@ function Posts() {
               key={post.id}
               className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
             >
-              {/* Post Image - full width */}
+      
               {post.image ? (
                 <img
                   src={post.image}
