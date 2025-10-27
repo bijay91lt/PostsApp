@@ -7,7 +7,7 @@ type Inputs = {
   title: string;
   body: string;
   image?: string;
-  tags: string;
+  tags?: string;
 }
 interface NewPostModalProps {
   isOpen: boolean;
