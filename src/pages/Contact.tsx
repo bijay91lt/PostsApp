@@ -9,7 +9,7 @@ function Contact() {
 
     console.log({fullName, email, phone});
 
-    alert("Form Submitted");
+    alert("We'll get back to you " + fullName);
 
     setFullName("");
     setEmail("");

@@ -34,7 +34,7 @@ const NewPostModal = ({isOpen, onClose, onSubmit, children, }: NewPostModalProps
   const onFormSubmit: SubmitHandler< Inputs> = (data) => {
     const newPost: Omit<Post, "id"> = {
       title : data.title,
-      body : data.title,
+      body : data.body,
       image: data.image || undefined,
       tags: data.tags ? data.tags.split(",").map((t) => t.trim()) : [],
       reactions: 0,
