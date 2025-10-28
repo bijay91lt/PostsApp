@@ -1,19 +1,16 @@
-import './App.css'
-import {Outlet} from 'react-router-dom';
-import Header from './pages/Header';
-import Footer from './pages/Footer';
-import { ThemeProvider } from './pages/ThemeContext';
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import Header from "./pages/Header";
+import Footer from "./pages/Footer";
 
 function App() {
-  
-
   return (
-    <ThemeProvider>
-      <Header/>
-      <Outlet/>
-      <Footer/> 
-    </ThemeProvider>
-  )
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
 
-export default App
+export default App;
