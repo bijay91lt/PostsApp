@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
 import type { Post } from '../types/PostType'
 import type {DummyJSONPost} from "../types/DummyJsonPost"
+import { useQuery } from '@tanstack/react-query';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
@@ -11,36 +11,33 @@ interface DummyJSONResponse{
     limit: number;
 }
 
+const fetchPosts = async (): Promise<Post[]> => {
+    const res = await fetch(`${API_BASE}/posts`)
+
+    if(!res.ok){
+        throw new Error('Failed to fetch posts');
+    }
+
+    const json = await res.json() as DummyJSONResponse;
+
+    return json.posts.map((post) => ({
+        id: post.id,
+        userId: post.userId,
+        title: post.title,
+        body: post.body,
+        tags: post.tags,
+        reactions:
+            typeof post.reactions === 'object'
+                ? post.reactions.likes ?? 0
+                : post.reactions ?? 0,
+        image: `https://picsum.photos/seed/${post.id}/400/300`,
+
+    }));
+}
+
 export const usePosts = () => {
-    const [data, setData] = useState<Post[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        fetch(`${API_BASE}/posts`)
-        .then(res => {
-            if(!res.ok) throw new Error('Failed to fetch posts');
-            return res.json() as Promise<DummyJSONResponse>;
-        })
-        .then(json => {
-            const enrichedPosts: Post [] = json.posts.map((post) => ({
-                id: post.id,
-                userId:post.userId,
-                title: post.title,
-                body: post.body,
-                tags: post.tags,
-                reactions: 
-                    typeof post.reactions === 'object'
-                    ? post.reactions.likes
-                    : post.reactions ?? 0,
-                image: `https://picsum.photos/seed/${post.id}/400/300`
-            }));
-
-            setData(enrichedPosts);
-        })
-        .catch(err => setError(err.message))
-        .finally(() => setLoading(false));
-    }, []);
-
-    return {data, loading, error};
+   return useQuery<Post[], Error>({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+   });
 }
